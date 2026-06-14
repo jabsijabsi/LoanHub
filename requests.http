@@ -1,0 +1,56 @@
+@host = http://localhost:5099
+
+### Login
+# @name login
+POST {{host}}/api/auth/login
+Content-Type: application/json
+
+{
+  "username": "AniJabakhidze",
+  "password": "Password1!"
+}
+
+@token = {{login.response.body.token}}
+
+### Create a customer
+POST {{host}}/api/customers
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "firstName": "Nika",
+  "lastName": "Cher",
+  "personalNumber": "44556677889",
+  "birthDate": "1996-08-21",
+  "creditScore": 690
+}
+
+### Create a loan application (seeded customer id = 1)
+POST {{host}}/api/Loans/CreateApplication
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "customerId": 1,
+  "amount": 12000,
+  "interestRate": 11.5,
+  "termMonths": 18
+}
+
+### Get loan
+GET {{host}}/api/loans/1
+Authorization: Bearer {{token}}
+
+### Make a payment
+POST {{host}}/api/payments
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "loanId": 1,
+  "amount": 740.00
+}
+
+### Customer loan history
+GET {{host}}/api/customers/loans?customerId=1
+Authorization: Bearer {{token}}

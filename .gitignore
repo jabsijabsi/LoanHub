@@ -1,0 +1,23 @@
+## Build output
+bin/
+obj/
+out/
+
+## IDE
+.idea/
+.vs/
+.vscode/
+*.user
+*.suo
+*.DotSettings.user
+
+## Databases
+*.db
+*.db-shm
+*.db-wal
+*.sqlite
+
+## Logs & OS
+*.log
+.DS_Store
+Thumbs.db
